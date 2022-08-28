@@ -1,0 +1,7 @@
+- name: microfacet
+  config:
+    color: [0.2, 0.2, 0.4]
+    roughness: 0.28
+- name: diffuse
+  config:
+    color: [0, 0, 0]
