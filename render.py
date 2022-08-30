@@ -16,6 +16,7 @@ from aris.core.io import build_integrator, build_scene
 from aris.core.scene import Scene
 from aris.integrator import Integrator
 from aris.utils.image_utils import save_image, tonemap_image
+from aris.utils.openexr_utils import write_openexr
 from aris.utils.render_utils import get_coords_multisample
 
 logger = logging.getLogger(__name__)
@@ -85,6 +86,9 @@ def main(cfg: RenderConfig = None):
             cv2.imshow(window_name, cv2.cvtColor(displayed, cv2.COLOR_RGB2BGR))
 
         save_image(out_dir / "output.png", result.numpy())
+
+    if cfg.save_exr:
+        write_openexr(out_dir / "output.exr", result, "RGB")
 
     integrator.on_render_ended()
 

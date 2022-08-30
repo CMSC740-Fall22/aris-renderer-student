@@ -15,6 +15,7 @@ class RenderConfig:
     integrator: ObjectConfig
     gui: bool
     device: str
+    save_exr: bool
 
 cs = ConfigStore.instance()
 cs.store(name="render_schema", node=RenderConfig)
