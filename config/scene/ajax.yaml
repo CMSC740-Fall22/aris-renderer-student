@@ -15,7 +15,7 @@ emitters:
       radiance: [20, 20, 20]
       i_primitive: 1
       geometry:
-      idx:
+      i_emitter:
 
 camera:
   name: perspective

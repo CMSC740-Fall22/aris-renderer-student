@@ -27,6 +27,12 @@ class EmitterQuery:
 
 
 class Emitter(ABC):
+    def __init__(self, geometry: Geometry, i_primitive: int, i_emitter: int) -> None:
+        super().__init__()
+        self.geometry = geometry
+        self.i_primitive = i_primitive
+        geometry.emitters_idx[i_primitive] = i_emitter
+
     @abstractmethod
     def sample(self, n_samples: int, device: str) -> EmitterQuery:
         raise NotImplementedError()

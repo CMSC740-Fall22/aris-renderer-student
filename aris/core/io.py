@@ -35,8 +35,8 @@ def build_scene(config: SceneConfig) -> Scene:
         emitter_cfg = OmegaConf.to_container(cfg.config)
         if "geometry" in emitter_cfg:
             emitter_cfg["geometry"] = geometry
-        if "idx" in emitter_cfg:
-            emitter_cfg["idx"] = i
+        if "i_emitter" in emitter_cfg:
+            emitter_cfg["i_emitter"] = i
         emitters.append(emitter_registry.build(cfg.name, emitter_cfg))
 
     return Scene(

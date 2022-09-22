@@ -48,31 +48,31 @@ emitters:
       radiance: [100, 100, 100]
       i_primitive: 0
       geometry:
-      idx:
+      i_emitter:
   - name: area
     config:
       radiance: [901.803, 901.803, 901.803]
       i_primitive: 1
       geometry:
-      idx:
+      i_emitter:
   - name: area
     config:
       radiance: [11.1111, 11.1111, 11.1111]
       i_primitive: 2
       geometry:
-      idx:
+      i_emitter:
   - name: area
     config:
       radiance: [1.23457, 1.23457, 1.23457]
       i_primitive: 3
       geometry:
-      idx:
+      i_emitter:
   - name: area
     config:
       radiance: [100, 100, 100]
       i_primitive: 4
       geometry:
-      idx:
+      i_emitter:
 camera:
   name: perspective
   config:
