@@ -10,19 +10,19 @@ from aris.utils.registry_utils import Registry
 
 @dataclass
 class EmitterQuery:
-    # (N, 3) points on the emitter
+    # (N, 3) points on the emitter (y)
     points: Tensor
-    # (N, 3) normals of above points
+    # (N, 3) normals of above points (n_y)
     normals: Tensor
     # (N,) pdf of the emitter sampling these points
     pdf: Tensor = None
-    # (N, 3) points to be lit
+    # (N, 3) points to be lit (x)
     targets: Tensor = None
-    # (N, 3) computed Le
+    # (N, 3) computed Le(y, y->x)
     le: Tensor = None
     # (N,) where Le is not zero
     mask: Tensor = None
-    # (N, 3) direction (normalized) from targets to points
+    # (N, 3) direction (normalized) from targets to points, the integrator should compute and set this
     d_target_point: Tensor = None
 
 
