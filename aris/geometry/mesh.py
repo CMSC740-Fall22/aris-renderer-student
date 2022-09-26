@@ -155,6 +155,7 @@ class MeshGeometry(Geometry):
         )
 
     def uniform_sample(self, i_primitive: int, n_samples: int, device: str) -> tuple[Tensor, Tensor]:
+        """Unifomly (per area) sample points from a mesh"""
         mesh = self.meshes[i_primitive]
         pc = mesh.sample_points_uniformly(n_samples, use_triangle_normal=True)
         points = np.asarray(pc.points).astype(np.float32)
@@ -169,6 +170,7 @@ class MeshGeometry(Geometry):
         return torch.from_numpy(points).to(device), torch.from_numpy(normals).to(device)
 
     def uniform_sample_pos_pdf(self, i_primitive: int) -> float:
+        """For a mesh, the pdf is inversed area"""
         return 1 / self.areas[i_primitive]
 
 

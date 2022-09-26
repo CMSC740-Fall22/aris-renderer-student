@@ -50,11 +50,22 @@ class Geometry(ABC):
         raise NotImplementedError()
 
     def uniform_sample(self, i_primitive: int, n_samples: int, device: str) -> tuple[Tensor, Tensor]:
-        """Uniformly sample points from the speicifed primitive"""
+        """Uniformly sample points from the speicifed primitive.
+
+        i_primitive: which primitive to sample from
+        n_samples: number of samples
+        device: device to put the returned tensors on
+
+        Returns: [points, normals], two (N, 3) tensors
+        """
         raise NotImplementedError()
 
     def uniform_sample_pos_pdf(self, i_primitive: int) -> float:
-        """Compute the positional pdf of points sampled from the specified primitive"""
+        """Compute the positional pdf of points sampled from the specified primitive.
+        No points input because sampling is uniform.
+
+        Returns: float, the pdf value
+        """
         raise NotImplementedError()
 
 
