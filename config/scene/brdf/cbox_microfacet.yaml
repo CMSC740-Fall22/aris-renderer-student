@@ -11,10 +11,14 @@
   config:
     color: [0.8, 0.8, 0.8]
     roughness: 0.28
+    ext_ior: 1
+    int_ior: 1.5
 - name: microfacet
   config:
     color: [0.8, 0.8, 0.8]
     roughness: 0.08
+    ext_ior: 1
+    int_ior: 1.5
 - name: diffuse
   config:
     color: [0.8, 0.8, 0.8]

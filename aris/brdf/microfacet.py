@@ -5,7 +5,7 @@ from aris.brdf import Brdf, BrdfQuery, brdf_registry
 
 
 class MicrofacetBrdf(Brdf):
-    def __init__(self, color: list[float], roughness: float) -> None:
+    def __init__(self, color: list[float], roughness: float, ext_ior: float, int_ior: float) -> None:
         super().__init__()
 
         assert len(color) == 3, "color should be RGB values"
@@ -15,6 +15,8 @@ class MicrofacetBrdf(Brdf):
         self.color = torch.tensor(color, dtype=torch.float32).view(1, 3)
         self.roughness = roughness
         self.ks = 1 - max(color)
+        self.ext_ior = ext_ior
+        self.int_ior = int_ior
 
     def sample(self, query: BrdfQuery) -> BrdfQuery:
         wo = query.wo
@@ -49,7 +51,7 @@ class MicrofacetBrdf(Brdf):
             return query
 
         # compute for valid samples only
-        values[valid] = microfacet_eval(wi[valid], wo[valid], self.ks, albedo, roughness)
+        values[valid] = microfacet_eval(wi[valid], wo[valid], self.ks, albedo, roughness, self.ext_ior, self.int_ior)
         pdf[valid] = microfacet_pdf(wi[valid], wo[valid], self.ks, roughness)
 
         # for BRDF sampling, compute values / pdf * cos(theta)
@@ -59,7 +61,7 @@ class MicrofacetBrdf(Brdf):
         return query
 
 
-def microfacet_eval(wi: Tensor, wo: Tensor, ks: Tensor, albedo: Tensor, roughness: float) -> Tensor:
+def microfacet_eval(wi: Tensor, wo: Tensor, ks: Tensor, albedo: Tensor, roughness: float, ext_ior: float, int_ior: float) -> Tensor:
     """Evaluate the microfacet BRDF
 
     The returned Tensor should have shape (N, 3)
