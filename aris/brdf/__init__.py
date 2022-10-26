@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
+import torch
 from torch import Tensor
 
 from aris.utils.import_utils import import_children
@@ -43,6 +44,10 @@ class Brdf(ABC):
     def eval(self, query: BrdfQuery) -> BrdfQuery:
         """Evaluate the BRDF, modify and return the input object"""
         raise NotImplementedError()
+
+    def get_albedo(self, device: str) -> Tensor:
+        """Get the albedo (diffuse) color"""
+        return torch.zeros(1, 3, device=device)
 
 
 brdf_registry = Registry("brdf", Brdf)

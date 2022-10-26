@@ -23,5 +23,18 @@ class Integrator(ABC):
         You can print some statistics, for example.
         """
 
+    def need_tonemap(self) -> bool:
+        """Whether the output from the integrator is in linear space and should be tone-mapped for display"""
+        return True
+
+    def init_nerad(self):
+        """Initialize neural radiosity network, if the integrator supports"""
+        raise NotImplementedError()
+
+    def render_nerad(self, scene: Scene, rays_o: Tensor, rays_d: Tensor) -> tuple[Tensor, Tensor]:
+        """Render a batch of rays using neural radiosity method, if the integrator supports"""
+        raise NotImplementedError()
+
+
 integrator_registry = Registry("integrator", Integrator)
 import_children(__file__, __name__)

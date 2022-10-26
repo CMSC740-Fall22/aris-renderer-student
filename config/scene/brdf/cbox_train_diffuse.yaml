@@ -1,12 +1,10 @@
 - name: diffuse
   config:
     color: [0.725, 0.71, 0.68]
-- name: diffuse
-  config:
-    color: [0.161, 0.133, 0.427]
-- name: diffuse
-  config:
-    color: [0.630, 0.065, 0.05]
+- name: learned_diffuse
+  config: {}
+- name: learned_diffuse
+  config: {}
 - name: diffuse
   config:
     color: [0.8, 0.8, 0.4]

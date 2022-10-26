@@ -85,7 +85,7 @@ def main(cfg: RenderConfig = None):
             displayed = np.clip(tonemap_image(result.numpy()), 0, 1)
             cv2.imshow(window_name, cv2.cvtColor(displayed, cv2.COLOR_RGB2BGR))
 
-        save_image(out_dir / "output.png", result.numpy())
+        save_image(out_dir / "output.png", result.numpy(), tonemap=integrator.need_tonemap())
 
     if cfg.save_exr:
         write_openexr(out_dir / "output.exr", result, "RGB")

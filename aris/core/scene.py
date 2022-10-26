@@ -103,3 +103,21 @@ class Scene:
             result.is_specular[mask] = batch.is_specular
 
         return result
+
+    def get_albedo_brdf(self, brdf_i: Tensor) -> Tensor:
+        """A helper function to call the BRDF get_albedo functions
+
+        brdf_i: (N,) indices of BRDF instances in the scene
+        returns: (N, 3) albedo color of each queried BRDF
+        """
+        result = torch.zeros(len(brdf_i), 3, device=brdf_i.device)
+        for i in range(len(self.brdf)):
+            brdf = self.brdf[i]
+            mask = brdf_i == i
+
+            if torch.sum(mask) == 0:
+                continue
+
+            result[mask] = brdf.get_albedo(brdf_i.device)
+
+        return result
